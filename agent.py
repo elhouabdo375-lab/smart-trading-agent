@@ -21,7 +21,6 @@ from datetime import datetime
 from collections import deque
 from typing import List, Optional, Tuple
 
-import schedule
 import feedparser
 import requests
 from dotenv import load_dotenv
@@ -1201,21 +1200,17 @@ def job():
     log.info("Job done ✅")
 
 
-# ================= RUN =================
+# ================= RUN (GitHub Mode) =================
 
 if __name__ == "__main__":
-    schedule.every(HOURLY_INTERVAL).hours.do(job)
 
     print("=" * 60)
-    print("🔥 Smart Agent v8 PRO TRADER Started ✅")
-    print(f"Sources: {len(RSS_SOURCES)} RSS feeds")
-    print("Modules: SCALP + TREND + TA (S/R, RSI, MA, ATR)")
-    print("Trade suggestions: Entry + SL + TP + R/R")
-    print(f"Confidence cap: {CONFIDENCE_MAX}%")
+    print("🔥 Smart Agent v8 PRO TRADER (GitHub Mode) ✅")
     print("=" * 60)
 
-    job()
-
-    while True:
-        schedule.run_pending()
-        time.sleep(30)
+    try:
+        job()
+        print("✅ Execution finished")
+    except Exception as e:
+        print(f"❌ Execution failed: {e}")
+        sys.exit(1)
