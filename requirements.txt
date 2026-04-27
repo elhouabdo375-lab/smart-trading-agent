@@ -1,0 +1,4 @@
+schedule
+feedparser
+requests
+python-dotenv
